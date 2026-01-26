@@ -1,0 +1,119 @@
+--- Distinct Launch Sites ---
+Query: SELECT DISTINCT Launch_Site FROM SPACEXDATASET
+
+    Launch_Site
+0   CCAFS LC-40
+1   VAFB SLC-4E
+2    KSC LC-39A
+3  CCAFS SLC-40
+
+==================================================
+
+--- Launch Sites beginning with 'CCA' ---
+Query: SELECT * FROM SPACEXDATASET WHERE Launch_Site LIKE 'CCA%' LIMIT 5
+
+         Date Time (UTC) Booster_Version  Launch_Site                                                        Payload  PAYLOAD_MASS__KG_      Orbit         Customer Mission_Outcome      Landing_Outcome
+0  2010-06-04   18:45:00  F9 v1.0  B0003  CCAFS LC-40                           Dragon Spacecraft Qualification Unit                  0        LEO           SpaceX         Success  Failure (parachute)
+1  2010-12-08   15:43:00  F9 v1.0  B0004  CCAFS LC-40  Dragon demo flight C1, two CubeSats, barrel of Brouere cheese                  0  LEO (ISS)  NASA (COTS) NRO         Success  Failure (parachute)
+2  2012-05-22    7:44:00  F9 v1.0  B0005  CCAFS LC-40                                          Dragon demo flight C2                525  LEO (ISS)      NASA (COTS)         Success           No attempt
+3  2012-10-08    0:35:00  F9 v1.0  B0006  CCAFS LC-40                                                   SpaceX CRS-1                500  LEO (ISS)       NASA (CRS)         Success           No attempt
+4  2013-03-01   15:10:00  F9 v1.0  B0007  CCAFS LC-40                                                   SpaceX CRS-2                677  LEO (ISS)       NASA (CRS)         Success           No attempt
+
+==================================================
+
+--- Total Payload Mass by NASA (CRS) ---
+Query: SELECT SUM(PAYLOAD_MASS__KG_) FROM SPACEXDATASET WHERE Customer = 'NASA (CRS)'
+
+   SUM(PAYLOAD_MASS__KG_)
+0                   45596
+
+==================================================
+
+--- Avg Payload Mass for F9 v1.1 ---
+Query: SELECT AVG(PAYLOAD_MASS__KG_) FROM SPACEXDATASET WHERE Booster_Version LIKE 'F9 v1.1%'
+
+   AVG(PAYLOAD_MASS__KG_)
+0             2534.666667
+
+==================================================
+
+--- Date of First Successful Landing ---
+Query: SELECT MIN(Date) FROM SPACEXDATASET WHERE Landing_Outcome = 'Success (ground pad)'
+
+    MIN(Date)
+0  2015-12-22
+
+==================================================
+
+--- Boosters with Success (drone ship) and Payload 4000-6000 ---
+Query: SELECT Booster_Version FROM SPACEXDATASET WHERE Landing_Outcome = 'Success (drone ship)' AND PAYLOAD_MASS__KG_ BETWEEN 4000 AND 6000
+
+  Booster_Version
+0     F9 FT B1022
+1     F9 FT B1026
+2  F9 FT  B1021.2
+3  F9 FT  B1031.2
+
+==================================================
+
+--- Total Items and Success/Failure Outcomes ---
+Query: SELECT Landing_Outcome, COUNT(Landing_Outcome) FROM SPACEXDATASET GROUP BY Landing_Outcome
+
+           Landing_Outcome  COUNT(Landing_Outcome)
+0       Controlled (ocean)                       5
+1                  Failure                       3
+2     Failure (drone ship)                       5
+3      Failure (parachute)                       2
+4               No attempt                      21
+5              No attempt                        1
+6   Precluded (drone ship)                       1
+7                  Success                      38
+8     Success (drone ship)                      14
+9     Success (ground pad)                       9
+10    Uncontrolled (ocean)                       2
+
+==================================================
+
+--- Boosters with Max Payload Mass ---
+Query: SELECT Booster_Version FROM SPACEXDATASET WHERE PAYLOAD_MASS__KG_ = (SELECT MAX(PAYLOAD_MASS__KG_) FROM SPACEXDATASET)
+
+   Booster_Version
+0    F9 B5 B1048.4
+1    F9 B5 B1049.4
+2    F9 B5 B1051.3
+3    F9 B5 B1056.4
+4    F9 B5 B1048.5
+5    F9 B5 B1051.4
+6    F9 B5 B1049.5
+7   F9 B5 B1060.2 
+8   F9 B5 B1058.3 
+9    F9 B5 B1051.6
+10   F9 B5 B1060.3
+11  F9 B5 B1049.7 
+
+==================================================
+
+--- Failed Landing Outcomes in 2015 ---
+Query: SELECT substr(Date, 6, 2) as Month, 'F9 v1.1' as Booster_Version, Launch_Site FROM SPACEXDATASET WHERE substr(Date,0,5)='2015' AND Landing_Outcome = 'Failure (drone ship)'
+
+  Month Booster_Version  Launch_Site
+0    01         F9 v1.1  CCAFS LC-40
+1    04         F9 v1.1  CCAFS LC-40
+
+==================================================
+
+--- Rank Landing Outcomes (2010-06-04 to 2017-03-20) ---
+Query: SELECT Landing_Outcome, COUNT(Landing_Outcome) as Count FROM SPACEXDATASET WHERE Date BETWEEN '2010-06-04' AND '2017-03-20' GROUP BY Landing_Outcome ORDER BY Count DESC
+
+          Landing_Outcome  Count
+0              No attempt     10
+1    Success (drone ship)      5
+2    Failure (drone ship)      5
+3    Success (ground pad)      3
+4      Controlled (ocean)      3
+5    Uncontrolled (ocean)      2
+6     Failure (parachute)      2
+7  Precluded (drone ship)      1
+
+==================================================
+

@@ -1,0 +1,8 @@
+Logistic Regression Best Parameters: {'C': 0.01, 'penalty': 'l2', 'solver': 'lbfgs'}
+Logistic Regression Accuracy: 0.8464285714285713
+SVM Best Parameters: {'C': 1.0, 'gamma': 0.03162277660168379, 'kernel': 'sigmoid'}
+SVM Accuracy: 0.8482142857142856
+Decision Tree Best Parameters: {'criterion': 'entropy', 'max_depth': 4, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'splitter': 'best'}
+Decision Tree Accuracy: 0.8625
+KNN Best Parameters: {'algorithm': 'auto', 'n_neighbors': 10, 'p': 1}
+KNN Accuracy: 0.8482142857142858
