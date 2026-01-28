@@ -1,0 +1,9 @@
+﻿RubenPA79/SpaceX-Capstone		public	2026-01-26T22:16:32Z
+RubenPA79/notebook		public	2025-10-07T15:32:35Z
+RubenPA79/ml-portfolio-ruben	Portfolio pr├íctico de aprendizaje en Machine Learning en 30ÔÇô60 d├¡as	public	2025-05-29T11:30:55Z
+RubenPA79/boilerplate-sea-level-predictor		public	2025-05-12T08:26:20Z
+RubenPA79/boilerplate-page-view-time-series-visualizer		public	2025-05-12T08:15:47Z
+RubenPA79/boilerplate-medical-data-visualizer		public, fork	2025-05-12T08:05:22Z
+RubenPA79/boilerplate-demographic-data-analyzer		public, fork	2025-05-11T22:08:13Z
+RubenPA79/mean-variance-calculator		public	2025-05-11T20:45:41Z
+RubenPA79/Proyectof		public	2024-11-26T18:32:32Z
