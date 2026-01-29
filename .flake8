@@ -1,0 +1,13 @@
+[flake8]
+max-line-length = 127
+max-complexity = 10
+count = True
+statistics = True
+exclude =
+    .venv,
+    .git,
+    __pycache__,
+    ml-portfolio-ruben/*,
+    boilerplate-sea-level-predictor/*,
+    boilerplate-page-view-time-series-visualizer/*,
+    mean-variance-calculator/*
