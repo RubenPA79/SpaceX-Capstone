@@ -7,7 +7,10 @@ exclude =
     .venv,
     .git,
     __pycache__,
-    ml-portfolio-ruben/*,
-    boilerplate-sea-level-predictor/*,
-    boilerplate-page-view-time-series-visualizer/*,
-    mean-variance-calculator/*
+    ml-portfolio-ruben,
+    boilerplate-sea-level-predictor,
+    boilerplate-page-view-time-series-visualizer,
+    mean-variance-calculator,
+    Proyectof,
+    notebook,
+    notebooks
